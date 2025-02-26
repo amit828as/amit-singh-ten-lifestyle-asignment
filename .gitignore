@@ -1,0 +1,4 @@
+ten-assignment-env/
+__pycache__/
+*.pyc
+.env
