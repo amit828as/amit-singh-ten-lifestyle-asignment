@@ -5,6 +5,7 @@ import uvicorn
 from fastapi import FastAPI
 from app.database import engine
 from app.models import Base
+from app.routes import booking, cancel
 
 def create_app() -> FastAPI:
     """
@@ -14,6 +15,10 @@ def create_app() -> FastAPI:
     Base.metadata.create_all(bind=engine)
 
     app = FastAPI(title="Booking System API", version="0.1.0")
+
+    # Import the routes
+    app.include_router(booking.router, prefix="/api", tags=["Booking"])
+    app.include_router(cancel.router, prefix="/api", tags=["Cancellation"])
 
     return app
 
