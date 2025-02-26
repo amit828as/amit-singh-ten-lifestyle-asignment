@@ -2,8 +2,6 @@ from fastapi import Header, HTTPException, status
 from typing import Optional
 import os
 
-
-
 API_KEY = os.getenv("API_KEY")  # Load the API key from environment
 
 def api_key_auth(x_api_key: Optional[str] = Header(None)):

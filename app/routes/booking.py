@@ -34,10 +34,11 @@ from datetime import datetime
 from app.DB.database import get_db
 from app.DB.models import Member, Inventory, Booking
 from app.schemas import BookingCreate, BookingRead
+from app.security.auth import api_key_auth
 
 router = APIRouter()
 
-@router.post("/book", response_model=BookingRead)
+@router.post("/book", response_model=BookingRead, dependencies=[Depends(api_key_auth)])
 def create_booking(
     booking_data: BookingCreate,
     db: Session = Depends(get_db),

@@ -35,10 +35,11 @@ from sqlalchemy.orm import Session
 from app.DB.database import get_db
 from app.DB.models import Member, Inventory, Booking
 from app.schemas import BookingRead
+from app.security.auth import api_key_auth
 
 router = APIRouter()
 
-@router.post("/cancel", response_model=BookingRead)
+@router.post("/cancel", response_model=BookingRead, dependencies=[Depends(api_key_auth)])
 def cancel_booking(
     booking_reference: str,
     db: Session = Depends(get_db),
