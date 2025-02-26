@@ -3,8 +3,8 @@ Main entry point for the FastAPI application.
 """
 import uvicorn
 from fastapi import FastAPI
-from app.database import engine
-from app.models import Base
+from app.DB.database import engine
+from app.DB.models import Base
 from app.routes import booking, cancel
 
 def create_app() -> FastAPI:
