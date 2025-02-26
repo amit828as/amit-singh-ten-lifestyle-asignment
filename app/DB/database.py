@@ -1,22 +1,17 @@
 """
 Database engine and session management for PostgreSQL using SQLAlchemy.
 """
-import os
 from typing import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from app.config import DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT
 
-# If you want, load from .env file using dotenv
-# from dotenv import load_dotenv
-# load_dotenv()
 
-# For demonstration, let's assume we have environment variables like:
-# DATABASE_URL="postgresql://user:password@localhost:5432/mydatabase"
-
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mydatabase")
+# PostgreSQL connection URL
+DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 # Create the engine
-engine = create_engine(DATABASE_URL, echo=True, future=True)
+engine = create_engine(DATABASE_URL, echo=False, future=True)
 
 # SessionLocal is our session factory, each request will use a new session
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine, future=True)

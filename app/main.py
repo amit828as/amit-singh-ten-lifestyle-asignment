@@ -3,9 +3,9 @@ Main entry point for the FastAPI application.
 """
 import uvicorn
 from fastapi import FastAPI
-from app.database import engine
-from app.models import Base
-from app.routes import booking, cancel
+from app.DB.database import engine
+from app.DB.models import Base
+from app.routes import booking, cancel, upload
 
 def create_app() -> FastAPI:
     """
@@ -19,6 +19,7 @@ def create_app() -> FastAPI:
     # Import the routes
     app.include_router(booking.router, prefix="/api", tags=["Booking"])
     app.include_router(cancel.router, prefix="/api", tags=["Cancellation"])
+    app.include_router(upload.router, prefix="/api", tags=["Upload"])
 
     return app
 

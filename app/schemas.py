@@ -1,7 +1,7 @@
 """
 Pydantic schemas for request and response validation.
 """
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from datetime import datetime, date
 from typing import Optional
 
